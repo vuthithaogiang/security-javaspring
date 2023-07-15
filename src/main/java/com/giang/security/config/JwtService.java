@@ -21,7 +21,7 @@ import java.util.function.Function;
 public class JwtService {
 
     private static final String SECRET_KEY = "7kE4P38iNlebE4Hu53LcHido+p6b2wjcRGVkQ1LF3QowlgX6rToVYzKabyyJHL5+";
-    private static final long  SECRET_EXPIRATION = 1000*60*24;
+    private static final long  SECRET_EXPIRATION = 1000*60*24*2; // 2 days
 
     @Value( value = SECRET_KEY)
     private String secretKey;
