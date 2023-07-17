@@ -20,15 +20,18 @@ import java.util.function.Function;
 @Service
 public class JwtService {
 
-    private static final String SECRET_KEY = "7kE4P38iNlebE4Hu53LcHido+p6b2wjcRGVkQ1LF3QowlgX6rToVYzKabyyJHL5+";
-    private static final long  SECRET_EXPIRATION =  1000*60*60*24*2; // 2 days
+//    private static final String SECRET_KEY = "7kE4P38iNlebE4Hu53LcHido+p6b2wjcRGVkQ1LF3QowlgX6rToVYzKabyyJHL5+";
+//    private static final long  SECRET_EXPIRATION =  1000*60*60*24*2; // 2 days
 
 
-    @Value( value = SECRET_KEY)
+    @Value("${application.security.jwt.secret-key}")
     private String secretKey;
 
-    private long jwtExpiration = SECRET_EXPIRATION;
-    private long refreshExpiration = SECRET_EXPIRATION;
+    @Value("${application.security.jwt.expiration}") // 1 day
+    private long jwtExpiration;
+
+    @Value("${application.security.jwt.refresh-token.expiration}") // 7 days
+    private long refreshExpiration;
 
     public String extractUsername(String token){
        return extractClaim(token, Claims::getSubject);
