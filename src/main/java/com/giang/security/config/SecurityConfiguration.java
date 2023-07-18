@@ -37,6 +37,7 @@ public class SecurityConfiguration  {
         http
                 .csrf(csrf->csrf.disable())
                 .authorizeHttpRequests()
+                .requestMatchers(GET,"api/v1/demo-controller/**").permitAll()
                 .requestMatchers("/api/v1/auth/**").permitAll()
                 .requestMatchers("/api/v1/management/**").hasAnyRole(ADMIN.name(), MANAGER.name())
                 .requestMatchers(GET, "/api/v1/management/**").hasAnyRole(ADMIN.name(), MANAGER.name())
