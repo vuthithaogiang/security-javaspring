@@ -15,8 +15,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.authentication.logout.LogoutHandler;
 
 import static com.giang.security.user.Permission.*;
-import static com.giang.security.user.Role.ADMIN;
-import static com.giang.security.user.Role.MANAGER;
+import static com.giang.security.user.Role.*;
 import static org.springframework.http.HttpMethod.*;
 
 
@@ -36,8 +35,11 @@ public class SecurityConfiguration  {
             throws  Exception{
         http
                 .csrf(csrf->csrf.disable())
-                .authorizeHttpRequests()
-                .requestMatchers(GET,"api/v1/demo-controller/**").permitAll()
+               .authorizeHttpRequests(
+               )
+                .requestMatchers("api/v1/demo-controller/**").permitAll()
+//                .requestMatchers(POST, "api/v1/demo-controller/image/**").hasAnyRole(USER.name(),ADMIN.name(), MANAGER.name())
+//                .requestMatchers(GET, "api/v1/demo-controller/image/**").hasAnyRole(USER.name(),ADMIN.name(), MANAGER.name())
                 .requestMatchers("/api/v1/auth/**").permitAll()
                 .requestMatchers("/api/v1/management/**").hasAnyRole(ADMIN.name(), MANAGER.name())
                 .requestMatchers(GET, "/api/v1/management/**").hasAnyRole(ADMIN.name(), MANAGER.name())

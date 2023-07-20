@@ -25,7 +25,7 @@ public class FileStorageServiceImpl implements  FileStorageService{
     private ImageRepository imageRepository;
 
 
-    private final  String FOLDER_PATH = "/D/Workspace/myFiles/";
+    private final  String FOLDER_PATH = "D:/Workspace/myFiles/";
 
     @Override
     public String uploadImage(MultipartFile file) throws IOException {
@@ -55,11 +55,12 @@ public class FileStorageServiceImpl implements  FileStorageService{
     public String uploadImageToFileSystem(MultipartFile file) throws IOException {
         String filePath = FOLDER_PATH + file.getOriginalFilename();
 
+        System.out.println(filePath);
+
         FileData fileData = fileDataRepository.save(FileData.builder()
                         .name(file.getOriginalFilename())
                         .type(file.getContentType())
-                        .filePath(filePath)
-                .build());
+                        .filePath(filePath).build());
 
         file.transferTo(new File(filePath));
 

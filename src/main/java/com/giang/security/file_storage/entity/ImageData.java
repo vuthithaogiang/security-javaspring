@@ -23,8 +23,9 @@ public class ImageData {
     private String name;
     private String type;
 
+
     @Lob
-    @Column(name = "image_data", length = 1000)
+    @Column(name = "image_data", length = 100000000) // 100MB
     private byte[] imageData;
 
 
